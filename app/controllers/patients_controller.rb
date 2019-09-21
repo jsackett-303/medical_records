@@ -18,7 +18,8 @@ class PatientsController < ApplicationController
     @patient = Patient.new(patient_params)
 
     if @patient.save
-      render json: @patient, status: :created, location: @patient
+      json = @patient.attributes.select { |k,_| k == 'id' }
+      render json: json, status: :created, location: @patient
     else
       render json: @patient.errors, status: :unprocessable_entity
     end
