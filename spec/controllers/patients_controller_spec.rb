@@ -29,11 +29,11 @@ RSpec.describe PatientsController, type: :controller do
   # Patient. As you add validations to Patient, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { first_name: 'Foo', last_name: 'Bar', email: 'foo@example.com' }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { last_name: '' }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -86,15 +86,16 @@ RSpec.describe PatientsController, type: :controller do
 
   describe "PUT #update" do
     context "with valid params" do
+      let(:last_name) { 'changed' }
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { last_name: last_name }
       }
 
       it "updates the requested patient" do
         patient = Patient.create! valid_attributes
         put :update, params: {id: patient.to_param, patient: new_attributes}, session: valid_session
         patient.reload
-        skip("Add assertions for updated state")
+        expect(patient.last_name).to eq(last_name)
       end
 
       it "renders a JSON response with the patient" do

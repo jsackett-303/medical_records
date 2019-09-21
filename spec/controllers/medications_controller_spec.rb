@@ -29,11 +29,11 @@ RSpec.describe MedicationsController, type: :controller do
   # Medication. As you add validations to Medication, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { medication_name: 'advil', manufacturer: 'generic' }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { medication_name: '' }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -86,15 +86,16 @@ RSpec.describe MedicationsController, type: :controller do
 
   describe "PUT #update" do
     context "with valid params" do
+      let(:attr) { 'new_manufacturer' }
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { manufacturer: attr }
       }
 
       it "updates the requested medication" do
         medication = Medication.create! valid_attributes
         put :update, params: {id: medication.to_param, medication: new_attributes}, session: valid_session
         medication.reload
-        skip("Add assertions for updated state")
+        expect(medication.manufacturer).to eq(attr)
       end
 
       it "renders a JSON response with the medication" do

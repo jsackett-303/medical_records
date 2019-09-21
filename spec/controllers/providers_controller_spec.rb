@@ -29,11 +29,11 @@ RSpec.describe ProvidersController, type: :controller do
   # Provider. As you add validations to Provider, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { first_name: 'Biz', last_name: 'Baz', office_address: '999 18th St', office_city: 'Denver', office_state: 'CO' }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { last_name: '' }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -86,15 +86,16 @@ RSpec.describe ProvidersController, type: :controller do
 
   describe "PUT #update" do
     context "with valid params" do
+      let(:last_name) { 'changed' }
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { last_name: last_name }
       }
 
       it "updates the requested provider" do
         provider = Provider.create! valid_attributes
         put :update, params: {id: provider.to_param, provider: new_attributes}, session: valid_session
         provider.reload
-        skip("Add assertions for updated state")
+        expect(provider.last_name).to eq(last_name)
       end
 
       it "renders a JSON response with the provider" do
