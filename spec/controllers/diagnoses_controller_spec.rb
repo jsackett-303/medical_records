@@ -29,7 +29,7 @@ RSpec.describe DiagnosesController, type: :controller do
   # Diagnosis. As you add validations to Diagnosis, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    { diagnosis: 'death', diagnosis_code: 'X' }
+    { diagnosis: 'healthy', diagnosis_code: 'X' }
   }
 
   let(:invalid_attributes) {
